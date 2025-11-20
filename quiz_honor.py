@@ -55,7 +55,7 @@ class Quiz:
 
     # Load quiz data
     def load_quiz(self):
-        with open(r'.json/{}'.format(self.question_file_name), 'r', encoding='utf-8-sig') as f:
+        with open(r'json/{}'.format(self.question_file_name), 'r', encoding='utf-8-sig') as f:
             self.quiz_data = json.load(f)
 
     def sync_translate_tw(self, text):
