@@ -1,12 +1,10 @@
 import streamlit as st
 # import crewAI_agent
 import time
-import logging
-from logging.handlers import TimedRotatingFileHandler
 import os
 import Function
 from openai import OpenAI
-
+import mysql
 
 
 llm = "qwen3-max"
@@ -30,46 +28,6 @@ llm = "qwen3-max"
 # )
 # response.choices[0].message.content
 
-
-LOG_DIR = "log"
-os.makedirs(LOG_DIR, exist_ok=True)
-
-def get_user_logger(username):
-   
-    if not username:
-        raise ValueError("Username is required")
-
-    # 清理用户名，防止路径注入（如包含 / 或 \ 等）
-    safe_username = "".join(c for c in username if c.isalnum() or c in ('-', '_'))[:50]
-
-    log_file_path = os.path.join(LOG_DIR, f"{safe_username}.log")
-
-    # 创建 logger
-    logger_name = f"user_logger_{safe_username}"
-    logger = logging.getLogger(logger_name)
-
-    # 避免重复添加 handler
-    if not logger.handlers:
-        logger.setLevel(logging.INFO)
-
-        
-        handler = TimedRotatingFileHandler(
-            log_file_path,
-            when='D',      
-            interval=2,   
-            backupCount=1,  
-            encoding='utf-8'
-        )
-        formatter = logging.Formatter(
-            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-        )
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
-
-        # 防止向上传递到 root logger（避免重复输出）
-        logger.propagate = False
-
-    return logger
 
 # Initialize system prompt
 SYSTEM = f'''你是一位专业的小学数学教师，现在小学生对一道题目感到疑惑，请你依据指导步骤协助学生完成解答。
@@ -172,15 +130,12 @@ def agent_check_is_explanation_answered(check_messages, explanation):
     # Ask LLM for response
     response = get_llm_feedback(text=prompt, model="qwen3-max")
     username = st.session_state.get("logged_user_name")
-    logger = get_user_logger(username)
-    logger.info(f'''====LLM checking if a analysis is answered====
+    message = f'''====LLM checking if a analysis is answered====
 【prompt】
 {prompt}
 【response】
-{response}''')
-    end_time = time.time()
-    to = end_time - start_time
-    logger.info(f"====TIME====  {to}s  {len(response) / to} words/s")
+{response}'''
+    mysql.insert_chat_info(username, message)
     # part = response.split("</think>\n\n", 1)
     # response = part[1]
     # print("是否回答的判断：" + response)
@@ -228,15 +183,12 @@ def agent_check_move_to_next_explanation(question, explanation, scale, check_mes
     )
     response = completion.choices[0].message.content
     username = st.session_state.get("logged_user_name")
-    logger = get_user_logger(username)
-    logger.info(f'''====LLM checking about explanation ====
+    message = f'''====LLM checking about explanation ====
         【prompt】
         {content}
         【response】
-        {response}''')
-    end_time = time.time()
-    to = end_time - start_time
-    logger.info(f"====TIME====  {to}s  {len(response) / to} words/s")
+        {response}'''
+    mysql.insert_chat_info(username, message)
     # part = response.split("</think>\n\n", 1)
     # response = part[1]
     # print("是否掌握的判断：" + response)
@@ -263,16 +215,12 @@ def agent_check_is_question_answered(history):
     # Ask LLM for response
     response = get_llm_feedback(text=prompt, model="qwen3-max")
     username = st.session_state.get("logged_user_name")
-    logger = get_user_logger(username)
-    logger.info(f'''====LLM's checking whether a question is answered====
+    message = f'''====LLM's checking whether a question is answered====
 【prompt】
 {prompt}
 【response】
-{response}''')
-    end_time = time.time()
-    to = end_time - start_time
-    
-    logger.info(f"====TIME====  {to}s  {len(response) / to} words/s")
+{response}'''
+    mysql.insert_chat_info(username, message)
     return "有回答" in response     # return whether the string "有回答" is present in the response (True or False)
 
 
@@ -296,16 +244,12 @@ def agent_error_tutor(question, history):
     # Ask LLM for response
     response = get_llm_feedback(text=prompt, model="qwen3-max")
     username = st.session_state.get("logged_user_name")
-    logger = get_user_logger(username)
-    logger.info(f'''====Error Tutor====
+    message = f'''====Error Tutor====
     【prompt】
     {prompt}
     【response】
-    {response}''')
-    end_time = time.time()
-    to = end_time - start_time
-    
-    logger.info(f"====TIME====  {to}s  {len(response) / to} words/s")
+    {response}'''
+    mysql.insert_chat_info(username, message)
     # part = response.split("</think>\n\n", 1)
     # response = part[1]
     # print("纠错助手输出：" + response)
@@ -342,16 +286,12 @@ def agent_check_is_incorrect_answer(history, question, scale):
 '''
     response = get_llm_feedback(text=prompt, model="qwen3-max")
     username = st.session_state.get("logged_user_name")
-    logger = get_user_logger(username)
-    logger.info(f'''====LLM checking if an answer is incorrect====
+    message = f'''====LLM checking if an answer is incorrect====
     【prompt】
     {prompt}
     【response】
-    {response}''')
-    end_time = time.time()
-    to = end_time - start_time
-    
-    logger.info(f"====TIME====  {to}s  {len(response) / to} words/s")
+    {response}'''
+    mysql.insert_chat_info(username, message)
     # part = response.split("</think>\n\n", 1)
     # response = part[1]
     # print("是否正确的判断：" + response)
@@ -385,14 +325,12 @@ def agent_tutor(user_input, question, explanation, history, scale):
     response = get_llm_response(user_input, history[:-1], header, "qwen3-max", system)
     history.append({"role": "assistant", "content": response})
     username = st.session_state.get("logged_user_name")
-    logger = get_user_logger(username)
-    logger.info(f'''====LLM response on step-by-step guidance====
+    message = f'''====LLM response on step-by-step guidance====
     【prompt】
     {header + user_input}
     【response】
-    {response}''')
-    end_time = time.time()
-    to = end_time - start_time
-    logger.info(f"====TIME====  {to} s  {len(response) / to} words/s")
+    {response}'''
+    mysql.insert_chat_info(username, message)
     st.session_state.messages_with_error = ''
     return history, response
+
