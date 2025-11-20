@@ -6,7 +6,7 @@ import mysql
 
 class Auth:
     def __init__(self):
-        self.conn = st.connection('mysql', type='sql')
+        self.conn = mysql.connect_to_db()
         if "logged_in" not in st.session_state:
             st.session_state["logged_in"] = 0
         if "logged_key" not in st.session_state:
@@ -82,7 +82,7 @@ class Auth:
             
             # 处理按钮点击
             if register_button:
-                result = self.conn.query(f"SELECT * FROM student_info_25_6 WHERE username = '{username}'")
+                result = mysql.get_students_by_name(username)
                 if len(result) > 0:
                     st.error("用戶名已存在 😢")
                     time.sleep(2)
@@ -276,7 +276,7 @@ class Auth:
                 # 处理按钮点击
                 if register_button:
                     # 检查用户名是否已存在
-                    result = self.conn.query(f"SELECT * FROM student_info_25_6 WHERE username = '{username}'")
+                    result = mysql.get_students_by_name(username)
                     if len(result) > 0:
                         st.error("用戶名已存在")
                         time.sleep(2)

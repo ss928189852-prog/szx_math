@@ -193,3 +193,13 @@ def get_students_by_classes(class_list):
             return [row[0] for row in cursor.fetchall()]
     finally:
         connection.close()
+
+def get_students_by_name(username):
+    connection = connect_to_db()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM student_info_25_6 WHERE username = %s", (username,))
+            result = cursor.fetchone()
+            return result
+    finally:
+        connection.close()
