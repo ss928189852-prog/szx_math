@@ -1,0 +1,76 @@
+﻿[
+    {
+        "qid": 1,
+        "grade": "4",
+        "unit": "4N6",
+        "objective": "約分",
+        "criteria": "約至最簡分數",
+        "difficulty": "1",
+        "question": "把 $\\frac{24}{30}$ 約至最簡分數。",
+        "options": ["A. $\\frac{12}{15}$", "B. $\\frac{4}{5}$", "C. $\\frac{8}{10}$", "D. $\\frac{3}{10}$"],
+        "options_fig": [
+            {"numerator": 12, "denominator": 15, "display": "$\\frac{12}{15}$"},
+            {"numerator": 4, "denominator": 5, "display": "$\\frac{4}{5}$"},
+            {"numerator": 8, "denominator": 10, "display": "$\\frac{8}{10}$"},
+            {"numerator": 3, "denominator": 10, "display": "$\\frac{3}{10}$"}
+        ],
+        "code": "8",
+        "lcm": [{"numerator": 24, "denominator": 30, "display": "$\\frac{24}{30}$"}],
+        "num_solutions": 1,
+        "explanation": [
+        "把分數的分子和分母同時除以一個相同的數，就是約分。約分所得分數和原有分數的數值相同。24 和 30 的最大公因數是什麼？",
+        "分子和分母同時除以它們的最大公因數，所得結果就是該數的最簡分數。最簡分數是多少？"
+        ],
+        "scale": [
+            "學生需明確回答6",
+            "學生需明確回答最簡分數，即4/5"
+        ],
+        "errors": [
+            "約至最簡分數",
+            "",
+            "約至最簡分數",
+            "約至最簡分數"
+        ],
+        "answer": "B",
+        "picture": ""
+    },
+    {
+        "qid": 2,
+        "grade": "4",
+        "unit": "4N6",
+        "objective": "約分",
+        "criteria": "涉及先約分後擴分",
+        "difficulty": "1",
+        "question": "括號內的數是甚麼？$\\frac{18}{24} = \\frac{( )}{20}$",
+        "options": ["A. 12", "B. 14", "C. 15", "D. 16"],
+        "options_fig": [
+            {"numerator": 12, "denominator": 20, "display": "$\\frac{12}{20}$"},
+            {"numerator": 14, "denominator": 20, "display": "$\\frac{14}{20}$"},
+            {"numerator": 15, "denominator": 20, "display": "$\\frac{15}{20}$"},
+            {"numerator": 16, "denominator": 20, "display": "$\\frac{16}{20}$"}
+        ],
+        "code": "8",
+        "lcm": [{"numerator": 18, "denominator": 24, "display": "$\\frac{18}{24}$"}],
+        "num_solutions": 1,
+        "explanation": [
+            "24是否可以除以一個整數後得到20?",
+            "將 $\\frac{18}{24}$ 約至最簡分數，結果是多少？",
+            "要將最簡分數的分母由 4 變成 20，需乘以多少？",
+            "分子也需乘以相同倍數，新的分子是多少？"
+        ],
+        "scale": [
+            "學生需明確回答不可以",
+            "學生需明確回答最簡分數，即3/4",
+            "學生需明確回答5",
+            "學生需明確回答15"
+        ],
+        "errors": [
+            "涉及先約分後擴分",
+            "涉及先約分後擴分",
+            "",
+            "涉及先約分後擴分"
+        ],
+        "answer": "C",
+        "picture": ""
+    }
+]

@@ -1,0 +1,90 @@
+﻿[
+{
+    "qid": 1,
+    "grade": "4",
+    "unit": "4N6",
+    "objective": "假分數與帶分數互化",
+    "criteria": "假分數化帶分數",
+    "difficulty": "1",
+    "question": "把 $\\frac{25}{7}$ 化為帶分數。",
+    "options": [
+        "A. $3\\frac{4}{7}$",
+        "B. $4\\frac{3}{7}$",
+        "C. $7\\frac{3}{4}$",
+        "D. $2\\frac{5}{7}$"
+    ],
+    "options_fig": [
+        {"numerator": 25, "denominator": 7, "display": "$3\\frac{4}{7}$"},
+        {"numerator": 31, "denominator": 7, "display": "$4\\frac{3}{7}$"},
+        {"numerator": 31, "denominator": 4, "display": "$7\\frac{3}{4}$"},
+        {"numerator": 19, "denominator": 7, "display": "$2\\frac{5}{7}$"}
+    ],
+    "code": "9",
+    "lcm": [
+        {"numerator": 25, "denominator": 7, "display": "$\\frac{25}{7}$"}
+    ],
+    "num_solutions": 1,
+    "explanation": [
+        "$\\frac{25}{7}$ 表示有 25 個 $\\frac{1}{7}$。每 7 個 $\\frac{1}{7}$ 可以組成 1。25 除以 7 商是多少？",
+        "25 ÷ 7 的餘數是多少？",
+        "商代表可以組成幾個「1」，餘數代表還剩下幾個 $\\frac{1}{7}$，所以最終的答案是多少？"
+    ],
+    "scale": [
+        "學生需明確回答3",
+        "學生需明確回答4",
+        "學生需明確回答3 4/7"
+    ],
+    "errors": [
+        "",
+        "假分數化帶分數",
+        "假分數化帶分數",
+        "假分數化帶分數"
+    ],
+    "answer": "A",
+    "picture": ""
+},
+{
+    "qid": 2,
+    "grade": "4",
+    "unit": "4N6",
+    "objective": "假分與帶分互化",
+    "criteria": "帶分數化假分數",
+    "difficulty": "1",
+    "question": "把 $2\\frac{3}{5}$ 化為假分數。",
+    "options": [
+        "A. $\\frac{23}{5}$",
+        "B. $\\frac{13}{5}$",
+        "C. $\\frac{11}{5}$",
+        "D. $\\frac{6}{5}$"
+    ],
+    "options_fig": [
+        {"numerator": 23, "denominator": 5, "display": "$\\frac{23}{5}$"},
+        {"numerator": 13, "denominator": 5, "display": "$\\frac{13}{5}$"},
+        {"numerator": 11, "denominator": 5, "display": "$\\frac{11}{5}$"},
+        {"numerator": 6, "denominator": 5, "display": "$\\frac{6}{5}$"}
+    ],
+    "code": "9",
+    "lcm": [
+        {"numerator": 13, "denominator": 5, "display": "$2\\frac{3}{5}$"}
+    ],
+    "num_solutions": 1,
+    "explanation": [
+        "$2\\frac{3}{5}$ 中，整數部分是 2。每一個「1」可以分成 5 個 $\\frac{1}{5}$，那麼 2 個「1」共有多少個 $\\frac{1}{5}$？",
+        "分數部分 $\\frac{3}{5}$ 表示還有多少個 $\\frac{1}{5}$？",
+        "整數和分數部分合起來，答案是多少？"
+    ],
+    "scale": [
+        "學生需明確回答10",
+        "學生需明確回答3",
+        "學生需明確回答13/5"
+    ],
+    "errors": [
+        "帶分數化假分數",
+        "",
+        "帶分數化假分數",
+        "帶分數化假分數"
+    ],
+    "answer": "B",
+    "picture": ""
+}
+]
