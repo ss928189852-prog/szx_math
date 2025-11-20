@@ -5,7 +5,7 @@ from math import gcd
 from functools import reduce
 
 from sympy.codegen.ast import integer
-
+import matplotlib as mpl
 
 # === LCM helpers ===
 def lcm(a, b):
@@ -76,8 +76,10 @@ def draw_integer_bar(ax, whole_num,
         ax.text(x_offset - 0.15, y_offset + 0.2, label_latex, va='center', fontsize=11)
 
 def data_fig_original(data):
-    plt.rcParams['font.sans-serif'] = ['SimHei']
-    # plt.rcParams['font.family'] = 'Noto Sans CJK SC'
+    font_path = ""
+    mpl.font_manager.fontManager.addfont(font_path)
+    
+    plt.rcParams['font.family'] = 'Microsoft YaHei'
     # === Parse original numerators/denominators and create LaTeX labels ===
     fractions = [Fraction(item["numerator"], item["denominator"]) for item in data]
     numerators = [item["numerator"] for item in data]
@@ -220,8 +222,9 @@ def data_fig_original(data):
 
 
 def data_fig_final(data, option_data):
-    plt.rcParams['font.sans-serif'] = ['SimHei']
-    # plt.rcParams['font.family'] = 'Noto Sans CJK SC'
+    font_path = ""
+    mpl.font_manager.fontManager.addfont(font_path)
+    plt.rcParams['font.family'] = 'Microsoft YaHei'
     # === Parse original numerators/denominators and create LaTeX labels ===
     fractions = [Fraction(item["numerator"], item["denominator"]) for item in data]
     numerators = [item["numerator"] for item in data]
