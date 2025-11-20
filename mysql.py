@@ -203,3 +203,13 @@ def get_students_by_name(username):
             return result
     finally:
         connection.close()
+
+def insert_chat_info(Username, message):
+    connection = connect_to_db()
+    try:
+        with connection.cursor() as cursor:
+            sql_insert = "INSERT INTO user_ai_text(username, message) VALUES (%s, %s)"
+            cursor.execute(sql_insert, (Username, message))
+        connection.commit()
+    finally:
+        connection.close()
