@@ -76,9 +76,8 @@ def draw_integer_bar(ax, whole_num,
         ax.text(x_offset - 0.15, y_offset + 0.2, label_latex, va='center', fontsize=11)
 
 def data_fig_original(data):
-    font_path = ""
+    font_path = "font/1611458310630572.ttf"
     mpl.font_manager.fontManager.addfont(font_path)
-    
     plt.rcParams['font.family'] = 'Microsoft YaHei'
     # === Parse original numerators/denominators and create LaTeX labels ===
     fractions = [Fraction(item["numerator"], item["denominator"]) for item in data]
@@ -222,7 +221,7 @@ def data_fig_original(data):
 
 
 def data_fig_final(data, option_data):
-    font_path = ""
+    font_path = "font/1611458310630572.ttf"
     mpl.font_manager.fontManager.addfont(font_path)
     plt.rcParams['font.family'] = 'Microsoft YaHei'
     # === Parse original numerators/denominators and create LaTeX labels ===
